@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    # Pie License Version 1.0 Summary
+
+    The Pie License, provided by KillerOfPie & PastryMaker Studios, is a modified MIT/X11 License offering freedom for using, modifying, and distributing the software. Key terms include:
+
+    1. Include the copyright notice, permission notice, and contributors file in all copies.
+    2. Distribute non-minified, non-obfuscated versions with the original, human-readable license intact and attribute to the original authors and contributors.
+    3. Avoid licensing conflicts, prioritizing this license and the Open Source Definition.
+    4. Distribute substantial modifications with a modified name or versioning scheme referencing the original version number.
+    5. Include comprehensive details of individuals or non-person entities involved in substantial modifications in the contributors file.
+
+    The software is provided "as is" without warranty. The copyright holders and contributors are not liable for any claim, damages, or liability. Use of names in advertising requires prior written authorization, except as specified in the contributors file.
+
+    This project should contain a copy of the Pie License. If it does not and have not received a copy of it along with this program, see ${license.url} for a copy of the license and contact ${license.holders} the issue can be corrected.
+
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <licenses>
+        <license>
+            <name>Pie_License</name>
+            <url>https://raw.githubusercontent.com/KillerOfPie/PieLicense/master/license.ftl</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <inceptionYear>2023</inceptionYear>
+    <organization>
+        <name>PastryMaker Studios</name>
+        <url>https://pastrymaker-studios.com</url>
+    </organization>
+
+    <groupId>com.pastrymaker_studios.plugin</groupId>
+    <artifactId>Criterion</artifactId>
+    <version>0.0.1-DEV</version>
+    <packaging>jar</packaging>
+    <name>${project.artifactId}</name>
+    <url>https://plugin.pastrymaker-studios.com/${project.artifactId}</url>
+    <description>The Most Customizable essential server plugin available.</description>
+
+    <properties>
+        <license.copyrightOwners>KillerOfPie &amp; ${organization.name}</license.copyrightOwners>
+        <license.sourceURL>https://raw.githubusercontent.com/KillerOfPie/PieLicense/master/license.ftl</license.sourceURL>
+        <header.sourceURL>https://raw.githubusercontent.com/KillerOfPie/PieLicense/master/header.ftl</header.sourceURL>
+
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.build.timestamp.format>yyyy-MM-dd'T'HH.mm.ss</maven.build.timestamp.format>
+        <timeStamp>${maven.build.timestamp}</timeStamp>
+        <pluginDir>com/pastrymaker_studios/plugin/${project.artifactId}</pluginDir>
+        <resourceDir>src/main/resources/${pluginDir}</resourceDir>
+        <currentYear/> <!-- Defined by plugin  -->
+
+        <!-- Profile variables  -->
+        <expirationFile/> <!-- default value for non-DEV build -->
+        <doClean/> <!-- default value for dirty build -->
+        <skipDocs/> <!-- default value for including docs -->
+        <commit/> <!-- default value for excluding commit -->
+        <branch/> <!-- default value for excluding commit -->
+        <fileTimeStamp/> <!-- default value for excluding commit -->
+        <build/> <!-- default value for jenkins build number -->
+        <testJarDeploy>${env.MC_TEST}/plugins</testJarDeploy>
+
+        <!-- Changeable variables  -->
+        <outputDir>target/output-files</outputDir>
+        <!-- Set to relative directory output of PreShade and JavaDoc files  -->
+
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <compilerArgs>
+                --enable-preview
+        </compilerArgs>
+
+    </properties>
+
+    <contributors>
+        <contributor>
+            <name>KillerOfPie</name>
+            <roles>
+                <role>Lead Developer</role>
+            </roles>
+            <organizationUrl>PastryMaker Studios</organizationUrl>
+        </contributor>
+    </contributors>
+
+    <profiles>
+        <profile>
+            <id>expiration</id> <!-- additional profile for DEV build -->
+            <properties>
+                <expirationFile>builddate.yml</expirationFile>
+            </properties>
+        </profile>
+        <profile>
+            <id>clean</id> <!-- additional profile for a Clean build -->
+            <properties>
+                <doClean>clean</doClean>
+            </properties>
+        </profile>
+        <profile>
+            <id>skipDocs</id> <!-- additional profile for a no javadocs in build -->
+            <properties>
+                <skipDocs>true</skipDocs>
+            </properties>
+        </profile>
+        <profile>
+            <id>includeTimeStamp</id> <!-- additional profile for a timestamped build -->
+            <properties>
+                <fileTimeStamp>-${timeStamp}</fileTimeStamp>
+            </properties>
+        </profile>
+        <profile>
+            <id>includeCommit</id> <!-- additional profile for a non-commit named build -->
+            <properties>
+                <!--suppress UnresolvedMavenProperty -->
+                <commit>-${commit_num}
+                </commit> <!-- `-Dcommit_num=###` is required for the commit number to appear in the file name -->
+            </properties>
+        </profile>
+        <profile>
+            <id>includeBranch</id> <!-- additional profile for a non-commit named build -->
+            <properties>
+                <!--suppress UnresolvedMavenProperty -->
+                <branch>-${branch_name}
+                </branch> <!-- `-Dbranch_name=###` is required for the branch name to appear in the file name -->
+            </properties>
+        </profile>
+        <profile>
+            <id>includeBuild</id> <!-- additional profile for a non-commit named build -->
+            <properties>
+                <!--suppress UnresolvedMavenProperty -->
+                <branch>-${build_num}
+                </branch> <!-- `-Dbuild_num=###` is required for the branch name to appear in the file name -->
+            </properties>
+        </profile>
+    </profiles>
+
+    <build>
+        <defaultGoal>${doClean} install</defaultGoal>
+        <finalName>${project.name}-${project.version}${branch}${commit}${fileTimeStamp}${build}</finalName>
+
+        <sourceDirectory>src/main/java</sourceDirectory>
+        <resources>
+            <resource>
+                <targetPath>.</targetPath>
+                <filtering>true</filtering>
+                <directory>${basedir}/${resourceDir}</directory>
+                <includes>
+                    <include>plugin.yml</include>
+                    <include>${expirationFile}</include>
+                </includes>
+            </resource>
+            <resource>
+                <targetPath>./Lang</targetPath>
+                <filtering>false</filtering>
+                <directory>${basedir}/${resourceDir}/Lang</directory>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>1.12</version>
+                <executions>
+                    <execution>
+                        <id>timestamp-property</id>
+                        <goals>
+                            <goal>timestamp-property</goal>
+                        </goals>
+                        <phase>validate</phase>
+                        <configuration>
+                            <name>currentYear</name>
+                            <pattern>yyyy</pattern>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.mycila</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <version>4.3</version>
+                <configuration>
+                    <licenseSets>
+                        <licenseSet>
+                            <header>${header.sourceURL}</header>
+                            <properties>
+                                <owner>${license.copyrightOwners}</owner>
+                                <email>contact@pastrymaker-studios.com</email>
+                                <year>${project.inceptionYear}-${currentYear}</year>
+                            </properties>
+                            <excludes>
+                                <exclude>**/README</exclude>
+                                <exclude>**/license/**</exclude>
+                                <exclude>**/resources/**</exclude>
+                            </excludes>
+                        </licenseSet>
+                        <licenseSet>
+                            <header>${license.sourceURL}</header>
+                            <properties>
+                                <owner>${license.copyrightOwners}</owner>
+                                <email>contact@pastrymaker-studios.com</email>
+                                <year>${project.inceptionYear}-${currentYear}</year>
+                            </properties>
+                            <includes>
+                                <include>**/license.txt</include>
+                            </includes>
+                        </licenseSet>
+                    </licenseSets>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>update-headers</id>
+                        <goals>
+                            <goal>format</goal>
+                        </goals>
+                        <phase>validate</phase>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- <plugin>
+                <groupId>io.github.floverfelt</groupId>
+                <artifactId>find-and-replace-maven-plugin</artifactId>
+                <version>1.1.0</version>
+                <executions>
+                    <execution>
+                        <id>___PluginName___</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>find-and-replace</goal>
+                        </goals>
+                        <configuration>
+                            <replacementType>file-contents,filenames,directory-names</replacementType>
+                            <baseDir>target/classes</baseDir>
+                            <findRegex>___PluginName___</findRegex>
+                            <replaceValue>${project.artifactId}</replaceValue>
+                            <recursive>true</recursive>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>___PackageTLD___</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>find-and-replace</goal>
+                        </goals>
+                        <configuration>
+                            <replacementType>file-contents,filenames,directory-names</replacementType>
+                            <baseDir>target/classes</baseDir>
+                            <findRegex>___PackageTLD___</findRegex>
+                            <replaceValue>${project.artifactId}</replaceValue>
+                            <recursive>true</recursive>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin> -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.3.0</version>
+                <configuration>
+                    <outputDirectory>${outputDir}/PreShade</outputDirectory>
+                    <minimizeJar>true</minimizeJar>
+                    <createDependencyReducedPom>false</createDependencyReducedPom>
+                    <outputFile>${testJarDeploy}/${project.name}.jar</outputFile>
+                    <artifactSet>
+                        <includes>
+                            <include>org.bstats:*</include>
+                        </includes>
+                    </artifactSet>
+                    <relocations>
+                        <relocation>
+                            <pattern>org.bstats</pattern>
+                            <shadedPattern>${project.groupId}.${project.artifactId}.bstats</shadedPattern>
+                        </relocation>
+                    </relocations>
+                    <filters>
+                        <filter>
+                            <artifact>*:*</artifact>
+                            <excludes>
+                                <exclude>META-INF/maven/**</exclude>
+                            </excludes>
+                        </filter>
+                    </filters>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.4.0</version>
+                <configuration>
+                    <name>${project.build.finalName}</name>
+                    <failOnError>false</failOnError>
+                    <jarOutputDirectory>${outputDir}/JavaDocs</jarOutputDirectory>
+                    <!--suppress UnresolvedMavenProperty -->
+                    <skip>${skipDocs}</skip>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>MG-Dev Jenkins CI Maven Repository</id>
+            <url>https://ci.mg-dev.eu/plugin/repository/everything</url>
+        </repository>
+
+        <repository>
+            <id>spigot-repo</id>
+            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+        </repository>
+
+        <repository>
+            <id>CodeMC</id>
+            <url>https://repo.codemc.org/repository/maven-public</url>
+        </repository>
+
+        <repository>
+            <id>minebench-repo</id>
+            <url>https://repo.minebench.de/</url>
+        </repository>
+
+        <repository>
+            <id>papermc</id>
+            <url>https://repo.papermc.io/repository/maven-public/</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>io.papermc.paper</groupId>
+            <artifactId>paper-api</artifactId>
+            <version>1.20.1-R0.1-20230627.215235-38</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.bstats</groupId>
+            <artifactId>bstats-bukkit</artifactId>
+            <version>3.0.0</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.bergerkiller.bukkit</groupId>
+            <artifactId>BKCommonLib</artifactId>
+            <version>1.20.2-v1</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <version>3.4.1</version>
+            <type>maven-plugin</type>
+        </dependency>
+
+        <dependency>
+            <groupId>com.mycila</groupId>
+            <artifactId>license-maven-plugin</artifactId>
+            <version>4.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>se.eris</groupId>
+            <artifactId>notnull-instrumenter-maven-plugin</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+    </dependencies>
+
+    <distributionManagement>
+        <repository>
+            <id>central</id>
+            <name>KOP-Artifactory-releases</name>
+            <url>https://repo.killerofpie.com/artifactory/${project.name}</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>KOP-Artifactory-snapshots</name>
+            <url>https://repo.killerofpie.com/artifactory/${project.name}</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+</project>

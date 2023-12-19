@@ -1,0 +1,13 @@
+name: ${project.name}
+version: ${project.version}
+main: ${project.groupId}.${project.artifactId}.${project.artifactId}
+api-version: 1.14
+load: PREWORLD
+
+authors: ${project.contributors}
+description: ${project.description}
+website: ${project.url}
+
+commands:
+  ${project.artifactId}:
+    description: Core command for ${project.artifactId}

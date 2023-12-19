@@ -1,0 +1,71 @@
+<!--
+
+    # Pie License Version 1.0 Summary
+
+    The Pie License, provided by ${copyright.holders}, is a modified MIT/X11 License offering freedom for using, modifying, and distributing the software. Key terms include:
+
+    1. Include the copyright notice, permission notice, and contributors file in all copies.
+    2. Distribute non-minified, non-obfuscated versions with the original, human-readable license intact and attribute to the original authors and contributors.
+    3. Avoid licensing conflicts, prioritizing this license and the Open Source Definition.
+    4. Distribute substantial modifications with a modified name or versioning scheme referencing the original version number.
+    5. Include comprehensive details of individuals or non-person entities involved in substantial modifications in the contributors file.
+
+    The software is provided "as is" without warranty. The copyright holders and contributors are not liable for any claim, damages, or liability. Use of names in advertising requires prior written authorization, except as specified in the contributors file.
+
+    This project should contain a copy of the Pie License. If it does not and have not received a copy of it along with this program, see ${license.url} for a copy of the license and contact ${license.holders} the issue can be corrected.
+
+-->
+<licenseSummary>
+  <dependencies>
+    <dependency>
+      <groupId>\Qaopalliance\E</groupId><!-- A regular expression -->
+      <artifactId>\Qaopalliance\E</artifactId><!-- A regular expression -->
+      <!-- <version>.*</version> A version pattern is optional, .* being the default.
+      <matchLicenses>
+        <!-- Match a list of licenses with a single entry having name "Public Domain" -->
+      <license>
+        <name>\QPublic Domain\E</name><!-- A regular expression -->
+      </license>
+    </matchLicenses>
+    <licenses approved="true" /><!-- Leave the matched dependency as is. -->
+    <!-- In this particular case we approve that code in the Public -->
+    <!-- Domain does not need any license URL. -->
+  </dependency>
+  <dependency>
+    <groupId>\Qasm\E</groupId>
+    <artifactId>\Qasm\E</artifactId>
+    <matchLicenses>
+      <!-- Match an empty list of licenses -->
+    </matchLicenses>
+    <!-- Replace the list of licenses in all matching dependencies with the following licenses -->
+    <licenses>
+      <license>
+        <name>BSD 3-Clause ASM</name>
+        <url>https://gitlab.ow2.org/asm/asm/raw/ASM_3_1_MVN/LICENSE.txt</url>
+      </license>
+    </licenses>
+  </dependency>
+  <dependency>
+    <groupId>\Qca.uhn.hapi\E</groupId>
+    <artifactId>.*</artifactId>
+    <matchLicenses>
+      <!-- Match a list of licenses with the following three entries in order: -->
+      <license>
+        <name>\QHAPI is dual licensed (MPL, GPL)\E</name>
+        <comments>\QHAPI is dual licensed under both the Mozilla Public License and the GNU General Public License.\E\s+\QWhat this means is that you may choose to use HAPI under the terms of either license.\E\s+\QYou are both permitted and encouraged to use HAPI, royalty-free, within your applications,\E\s+\Qwhether they are free/open-source or commercial/closed-source, provided you abide by the\E\s+\Qterms of one of the licenses below.\E\s+\QYou are under no obligations to inform the HAPI project about what you are doing with\E\s+\QHAPI, but we would love to hear about it anyway!\E</comments>
+      </license>
+      <license>
+        <name>\QMozilla Public License 1.1\E</name>
+        <url>\Qhttp://www.mozilla.org/MPL/MPL-1.1.txt\E</url>
+        <file>\Qmozilla public license 1.1 - index.0c5913925d40.txt\E</file>
+      </license>
+      <license>
+        <name>\QGNU General Public License\E</name>
+        <url>\Qhttp://www.gnu.org/licenses/gpl.txt\E</url>
+        <file>\Qgnu general public license - gpl.txt\E</file>
+      </license>
+    </matchLicenses>
+    <licenses approved="true" /><!-- It is OK that the first entry has no URL -->
+  </dependency>
+</dependencies>
+  </licenseSummary>
