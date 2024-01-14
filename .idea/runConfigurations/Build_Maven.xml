@@ -10,7 +10,9 @@
             <set />
           </option>
           <option name="goals">
-            <list />
+            <list>
+              <option value="-X" />
+            </list>
           </option>
           <option name="multimoduleDir" />
           <option name="pomFileName" />

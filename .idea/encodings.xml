@@ -2,8 +2,8 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/pastrymaker_studios/dev/Criterion" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/com/pastrymaker_studios/dev/Criterion/Lang" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/pastrymaker_studios/dev/criterion" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/pastrymaker_studios/dev/criterion/Lang" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources/com/pastrymaker_studios/plugin/Criterion" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources/com/pastrymaker_studios/plugin/Criterion/Lang" charset="UTF-8" />
   </component>

@@ -44,7 +44,7 @@
     <description>The Most Customizable essential server plugin available.</description>
 
     <properties>
-        <license.copyrightOwners>KillerOfPie &amp; ${organization.name}</license.copyrightOwners>
+        <license.copyrightOwners>KillerOfPie &amp; ${project.organization.name}</license.copyrightOwners>
         <license.sourceURL>https://raw.githubusercontent.com/KillerOfPie/PieLicense/master/license.ftl</license.sourceURL>
         <header.sourceURL>https://raw.githubusercontent.com/KillerOfPie/PieLicense/master/header.ftl</header.sourceURL>
 
@@ -222,13 +222,13 @@
                     </execution>
                 </executions>
             </plugin>
-            <!-- <plugin>
+            <plugin>
                 <groupId>io.github.floverfelt</groupId>
                 <artifactId>find-and-replace-maven-plugin</artifactId>
                 <version>1.1.0</version>
                 <executions>
                     <execution>
-                        <id>___PluginName___</id>
+                        <id>___Plugin___</id>
                         <phase>prepare-package</phase>
                         <goals>
                             <goal>find-and-replace</goal>
@@ -236,13 +236,13 @@
                         <configuration>
                             <replacementType>file-contents,filenames,directory-names</replacementType>
                             <baseDir>target/classes</baseDir>
-                            <findRegex>___PluginName___</findRegex>
+                            <findRegex>___Plugin___</findRegex>
                             <replaceValue>${project.artifactId}</replaceValue>
                             <recursive>true</recursive>
                         </configuration>
-                    </execution>
+                    </execution><!--
                     <execution>
-                        <id>___PackageTLD___</id>
+                        <id>___Package___</id>
                         <phase>prepare-package</phase>
                         <goals>
                             <goal>find-and-replace</goal>
@@ -250,13 +250,13 @@
                         <configuration>
                             <replacementType>file-contents,filenames,directory-names</replacementType>
                             <baseDir>target/classes</baseDir>
-                            <findRegex>___PackageTLD___</findRegex>
+                            <findRegex>___Package___</findRegex>
                             <replaceValue>${project.artifactId}</replaceValue>
                             <recursive>true</recursive>
                         </configuration>
-                    </execution>
+                    </execution>-->
                 </executions>
-            </plugin> -->
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -269,7 +269,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>3.3.0</version>
+                <version>3.5.0</version>
                 <configuration>
                     <outputDirectory>${outputDir}/PreShade</outputDirectory>
                     <minimizeJar>true</minimizeJar>
@@ -290,14 +290,14 @@
                         <filter>
                             <artifact>*:*</artifact>
                             <excludes>
-                                <exclude>META-INF/maven/**</exclude>
+                                <exclude>META-INF/**</exclude>
                             </excludes>
                         </filter>
                     </filters>
                 </configuration>
                 <executions>
                     <execution>
-                        <phase>install</phase>
+                        <phase>package</phase>
                         <goals>
                             <goal>shade</goal>
                         </goals>
@@ -334,11 +334,6 @@
         </repository>
 
         <repository>
-            <id>spigot-repo</id>
-            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
-        </repository>
-
-        <repository>
             <id>CodeMC</id>
             <url>https://repo.codemc.org/repository/maven-public</url>
         </repository>
@@ -352,6 +347,16 @@
             <id>papermc</id>
             <url>https://repo.papermc.io/repository/maven-public/</url>
         </repository>
+
+        <repository>
+            <id>spigot-repo</id>
+            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+        </repository>
+
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -364,7 +369,7 @@
         <dependency>
             <groupId>org.bstats</groupId>
             <artifactId>bstats-bukkit</artifactId>
-            <version>3.0.0</version>
+            <version>3.0.2</version>
             <scope>compile</scope>
         </dependency>
 
@@ -376,22 +381,29 @@
         </dependency>
 
         <dependency>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-javadoc-plugin</artifactId>
-            <version>3.4.1</version>
-            <type>maven-plugin</type>
-        </dependency>
-
-        <dependency>
             <groupId>com.mycila</groupId>
             <artifactId>license-maven-plugin</artifactId>
-            <version>4.3</version>
+            <version>4.2</version>
         </dependency>
 
         <dependency>
             <groupId>se.eris</groupId>
             <artifactId>notnull-instrumenter-maven-plugin</artifactId>
             <version>1.1.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.simplix-softworks</groupId>
+            <artifactId>SimplixStorage</artifactId>
+            <version>3.2.7</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.26</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
